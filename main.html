@@ -3,10 +3,68 @@
 
 <head>
   <title> REACT </title>
+
+  <style>
+    body {
+      background-color: #94a2af;
+      font-family: Verdana;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    #head {
+      position: sticky;
+      top: 0;
+
+      height: 9vh;
+      padding: 15px;
+
+      background-color: slategrey;
+      color: #eaeaea;
+
+      font-style: italic;
+      font-size: 120%;
+    }
+
+    #introCont {
+      margin-top: 25px;
+      padding: 20px;
+
+      background-color: #eaeaea;
+      border-radius: 10px;
+
+      width: 80%;
+    }
+
+    .heading {
+      text-align: center;
+
+      font-size: 170%;
+    }
+
+    .headBtn {
+      border-width: thin;
+      border-style: solid;
+      border-color: #eaeaea;
+      border-radius: 5px;
+
+      padding: 3px 6px 3px 6px;
+      font-style: normal;
+    }
+
+    ul {
+      font-size: 125%;
+      width: 90%;
+    }
+
+  </style>
 </head>
 
 <body>
-  <div id="root"> </div>
+  <div id="headCont"> </div>
+  <div id="introCont" class="self-center"> </div>
+  <div id="content2"> </div>
 
   <!-- TAILWIND -->
   <meta charset="UTF-8" />
@@ -22,16 +80,39 @@
 
   <!-- INLINE REACT CODE (would be in another file but this way it can run in browser) -->
   <script type="text/babel">
-    function App() {
+    function Head() {
       return(
-        <>
-          <p> hi </p>
-        </>
+        <div id="head" className="flex items-center justify-between">
+          <p> a guide on reacting </p>
+
+          <div className="flex gap-3">
+            <a className="headBtn" href="#content2"> content2 </a>
+            <a className="headBtn" href="#introCont"> UP </a>
+          </div>
+        </div>
       )
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    function Intro() {
+      return(
+        <div className="flex flex-col justify-center">
+          <h3 className="heading"> What is React? </h3>
+          <hr />
+          <br />
+
+          <ul className="list-disc pl-6 list-inside self-center">
+            <li className="pb-2"> A JS library for building user interfaces </li>
+            <li className="pb-2"> More efficiently updates the DOM in response to user interactions by changing only what <em>needs</em> to be changed </li>
+          </ul>
+        </div>
+      )
+    }
+
+    const headCont = ReactDOM.createRoot(document.getElementById('headCont'));
+    headCont.render(<Head />);
+
+    const introCont = ReactDOM.createRoot(document.getElementById('introCont'));
+    introCont.render(<Intro />);
   </script>
 </body>
 

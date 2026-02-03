@@ -24,23 +24,37 @@
       color: #eaeaea;
 
       font-style: italic;
-      font-size: 120%;
+      font-size: 130%;
     }
 
     #introCont {
-      margin-top: 25px;
+      margin: 50px 25px 25px 25px;
       padding: 20px;
 
       background-color: #eaeaea;
       border-radius: 10px;
 
-      width: 80%;
+      width: 70%;
+      font-size: 120%;
+    }
+
+    #vdom {
+      padding: 30px;
+
+      background-color: #8d9aa6;
+      color: #eaeaea;
     }
 
     .heading {
       text-align: center;
 
       font-size: 170%;
+    }
+
+    .heading2 {
+      text-align: center;
+
+      font-size: 250%;
     }
 
     .headBtn {
@@ -64,7 +78,8 @@
 <body>
   <div id="headCont"> </div>
   <div id="introCont" class="self-center"> </div>
-  <div id="content2"> </div>
+  <br>
+  <div id="vdom"> </div>
 
   <!-- TAILWIND -->
   <meta charset="UTF-8" />
@@ -96,14 +111,50 @@
     function Intro() {
       return(
         <div className="flex flex-col justify-center">
-          <h3 className="heading"> What is React? </h3>
+          <h3 className="heading"> &#x2728; What is React?	&#x2728; </h3>
           <hr />
           <br />
 
           <ul className="list-disc pl-6 list-inside self-center">
-            <li className="pb-2"> A JS library for building user interfaces </li>
-            <li className="pb-2"> More efficiently updates the DOM in response to user interactions by changing only what <em>needs</em> to be changed </li>
+            <li className="pb-2"> A JS library for building user interfaces/interactive webpages created by Jordan Walke </li>
+            <li className="pb-2"> More efficiently updates the browser DOM in response to user interactions by changing only what <em>needs</em> to be changed </li>
+            <li className="pb-2"> Utilizes a <u>Virtual DOM</u>, a more lightweight copy of the browser DOM that lives within the memory </li>
           </ul>
+        </div>
+      )
+    }
+
+    function VDom() {
+      return(
+        <div className="flex flex-col justify-center">
+          <h3 className="heading2"> The Virtual DOM </h3>
+          <br />
+          <div className="flex flex-row gap-5">
+            <div className="max-w-sm rounded overflow-hidden bg-[#eaeaea]">
+              <div className="px-6 py-4">
+                <div className="text-gray-700 font-bold text-xl mb-2">aaa</div>
+                <p className="text-gray-700 text-base">
+                  aaa
+                </p>
+              </div>
+            </div>
+            <div className="max-w-sm rounded overflow-hidden bg-[#eaeaea]">
+              <div className="px-6 py-4">
+                <div className="text-gray-700 font-bold text-xl mb-2">aaa</div>
+                <p className="text-gray-700 text-base">
+                  aaa
+                </p>
+              </div>
+            </div>
+            <div className="max-w-sm rounded overflow-hidden bg-[#eaeaea]">
+              <div className="px-6 py-4">
+                <div className="text-gray-700 font-bold text-xl mb-2">aaa</div>
+                <p className="text-gray-700 text-base">
+                  aaa
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       )
     }
@@ -113,6 +164,9 @@
 
     const introCont = ReactDOM.createRoot(document.getElementById('introCont'));
     introCont.render(<Intro />);
+
+    const vdom = ReactDOM.createRoot(document.getElementById('vdom'));
+    vdom.render(<VDom />);
   </script>
 </body>
 

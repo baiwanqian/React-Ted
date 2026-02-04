@@ -68,14 +68,6 @@
       font-style: normal;
     }
 
-    .linebreak {
-      color: #eaeaea;
-    }
-
-    .lb2 {
-      color: #8d9aa6;
-    }
-
     ul {
       font-size: 125%;
       width: 90%;
@@ -123,10 +115,10 @@
 
     function Intro() {
       return(
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center self-center">
           <h3 className="heading"> &#x2728; What is React?	&#x2728; <br /> </h3>
           <hr />
-          <p className="linebreak"> \ </p>
+          <p className="text-[#eaeaea]"> \ </p>
 
           <ul className="list-disc pl-6 list-inside self-center">
             <li className="pb-2"> A JS library for building user interfaces/interactive webpages created by Jordan Walke </li>
@@ -141,10 +133,10 @@
       return(
         <div className="flex flex-col justify-center">
           <h3 className="heading2"> The Virtual DOM </h3>
-          <p className="lb2"> / </p> <p className="lb2"> / </p>
+          <p className="text-[#8d9aa6]"> / </p> <p className="text-[#8d9aa6]"> / </p>
           <div className="flex flex-col gap-5 justify-center items-center self-center w-1/2">
             <div className="flex flex-row gap-5 justify-center items-center w-7/7">
-              <div className="flex flex-col justify-center items-center w-3/7">
+              <div className="flex flex-col w-3/7">
                 <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Initial Render </div>
@@ -157,11 +149,11 @@
                   <p className="arrow text-[#8d9aa6]"> &#x2193; </p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-1/7">
+              <div className="flex flex-col w-1/7">
                 <p className="arrow text-center"> &#x2192; </p>
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
-              <div className="flex flex-col justify-center items-center w-3/7">
+              <div className="flex flex-col w-3/7">
                 <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Interaction </div>
@@ -171,12 +163,12 @@
                   </div>
                 </div>
                 <div>
-                  <p className="arrow"> &#x2193; </p>
+                  <p className="arrow text-center"> &#x2193; </p>
                 </div>
               </div>
             </div>
             <div className="flex flex-row gap-5 justify-center items-center w-7/7">
-              <div className="flex flex-col justify-center items-center w-3/7">
+              <div className="flex flex-col w-3/7">
                 <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Rerender </div>
@@ -189,11 +181,11 @@
                   <p className="arrow text-center"> &#x2193; </p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-1/7">
+              <div className="flex flex-col w-1/7">
                 <p className="arrow text-center"> &#x2190; </p>
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
-              <div className="flex flex-col justify-center items-center w-3/7">
+              <div className="flex flex-col w-3/7">
                 <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Diffing </div>

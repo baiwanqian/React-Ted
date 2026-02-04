@@ -68,13 +68,13 @@
       font-style: normal;
     }
 
-    ul {
+    ul:not(.text-left) {
       font-size: 125%;
       width: 90%;
     }
 
     .arrow {
-      font-size: 300%;
+      font-size: 400%;
     }
 
   </style>
@@ -132,16 +132,16 @@
     function VDom() {
       return(
         <div className="flex flex-col justify-center">
-          <h3 className="heading2"> The Virtual DOM </h3>
+          <h3 className="heading2"> <em>The Virtual DOM</em> </h3>
           <p className="text-[#8d9aa6]"> / </p> <p className="text-[#8d9aa6]"> / </p>
-          <div className="flex flex-col gap-5 justify-center items-center self-center w-1/2">
-            <div className="flex flex-row gap-5 justify-center items-center w-7/7">
+          <div className="flex flex-col gap-5 justify-center items-center self-center w-3/5">
+            <div className="flex flex-row gap-5 justify-center items-center w-full">
               <div className="flex flex-col w-3/7">
-                <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
+                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Initial Render </div>
                     <p className="text-gray-700 text-base text-center">
-                      aaa
+                      A Virtual DOM tree reflective of the Browser DOM is constructed
                     </p>
                   </div>
                 </div>
@@ -154,11 +154,15 @@
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
               <div className="flex flex-col w-3/7">
-                <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
+                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Interaction </div>
                     <p className="text-gray-700 text-base text-center">
-                      aaa
+                      User interactions are handled through the usage of React&apos;s event handlers such as OnClick and OnSubmit
+                      <div className="text-[#eaeaea] text-xs"> &nbsp </div>
+                      <div className="rounded p-1 bg-[#d3d3d3]">
+                        &lt;element onEvent=&#123;handlerFunction&#125; /&gt;
+                      </div>
                     </p>
                   </div>
                 </div>
@@ -167,13 +171,13 @@
                 </div>
               </div>
             </div>
-            <div className="flex flex-row gap-5 justify-center items-center w-7/7">
-              <div className="flex flex-col w-3/7">
-                <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
+            <div className="flex flex-row gap-5 justify-center items-center w-full ">
+              <div className="flex flex-col w-3/7 ">
+                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Rerender </div>
                     <p className="text-gray-700 text-base text-center">
-                      aaa
+                      A new Virtual DOM tree is constructed to reflect set changes caused by user interaction
                     </p>
                   </div>
                 </div>
@@ -186,11 +190,22 @@
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
               <div className="flex flex-col w-3/7">
-                <div className="w-1/1 rounded overflow-hidden bg-[#eaeaea]">
+                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Diffing </div>
                     <p className="text-gray-700 text-base text-center">
-                      aaa
+                      Diffing is a process of linear time (O(n)) in which the newly created Virtual DOM is compared to its predecessor align
+                      (comparing on a node basis).
+                      <ul className="list-disc pl-6 list-inside text-left">
+                        <li className="pb-2">
+                        When a DOM element of <b>different types</b> are detected during this process, the old subtree is
+                        removed and completely rebuilt to reflect this change
+                        </li>
+                        <li>
+                          When a DOM element of the <b>same type</b> is detected, only the modified properties will be
+                          altered (unaltered properties maintain its current state)
+                        </li>
+                      </ul>
                     </p>
                   </div>
                 </div>
@@ -199,12 +214,14 @@
                 </div>
               </div>
             </div>
-            <div className="flex flex-row gap-5 w-7/7">
-              <div className="w-3/7 rounded overflow-hidden bg-[#eaeaea]">
+            <div className="flex flex-row gap-5 w-full">
+              <div className="flex flex-col justify-center w-3/7 rounded overflow-hidden bg-[#eaeaea] h-[380px]">
                 <div className="px-6 py-4">
                   <div className="text-gray-700 font-bold text-xl mb-2 text-center"> DOM Update </div>
                   <p className="text-gray-700 text-base text-center">
-                    aaa
+                    After the differences are identified and a set of changes are identified (otherwise known as a patch),
+                    these changes are applied to the browser DOM. Multiple updates are executed in a single DOM update, further reducing
+                    the number of actual DOM manipulations
                   </p>
                 </div>
               </div>

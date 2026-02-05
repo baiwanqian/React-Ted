@@ -110,16 +110,88 @@
       color: #eaeaea;
     }
 
+    #openSound {
+      position: sticky;
+      bottom: 7px;
+      left: 96vw;
+
+      width: 20px;
+
+      font-size: 200%;
+    }
+
+    #openSound:hover {
+      color: #f3f3f3;
+    }
+
+    #soundboard {
+      position: fixed;
+      bottom: 13px;
+      left: 68.5vw;
+
+      width: 30vw;
+      height: 48vh;
+      background-color: white;
+
+      border-style: solid;
+      border-width: medium;
+      border-color: darkgrey;
+    }
+
+    #close {
+      margin-top: 10px;
+      margin-left: 95%;
+      font-size: 180%;
+
+      color: darkgrey
+    }
+
+    #close:hover {
+      color: black;
+    }
+
+    .aud:hover {
+      filter: brightness(0.8);
+    }
+
   </style>
 </head>
 
 <body>
+  <audio id="clap" src="https://image2url.com/r2/default/audio/1770259312345-81dc89e1-7fd2-4a14-b534-38ca0836c05f.mp3"> </audio>
+  <audio id="boing" src="https://image2url.com/r2/default/audio/1770259580622-ae8ee47c-a629-4909-bf3a-a581153676cb.mp3"> </audio>
+  <audio id="laugh" src="https://image2url.com/r2/default/audio/1770259749676-0d5b4c35-5892-4cf9-b854-e27f2932c842.mp3"> </audio>
+  <audio id="gameover" src="https://image2url.com/r2/default/audio/1770260064026-f3fb8833-072d-4bd1-948f-15c1ee5ac7f0.mp3"> </audio>
+  <audio id="boo" src="https://image2url.com/r2/default/audio/1770260083654-c7674553-d136-4dd1-bda9-1471a6134678.mp3"> </audio>
+
   <div id="1"> </div>
   <div id="headCont" class=""> </div>
   <div id="introCont" class="self-center"> </div>
   <div id="vdom"> </div>
   <div id = "btnDemo" class = "demoWrap"> </div>
   <div id = "todoDemo" class = "demoWrap"> </div>
+
+  <button id="openSound" onClick="reveal()"> ^ </button>
+  <div id="soundboard" class="rounded-2xl hidden px-5">
+    <button id="close" onClick="hide()"> X </button>
+    <div class="bg-[gainsboro] grid grid-cols-3 p-5 mt-3 rounded-2xl text-3xl" style="gap: 40px">
+      <div class="aud bg-white rounded-xl border-solid border-7 border-[#a3a3a3]">
+        <button onClick="play('clap')" class="w-full h-full" style="aspect-ratio:1/1"> &#x1F44F; </button>
+      </div>
+      <div class="aud bg-white rounded-xl border-solid border-7 border-[#a3a3a3]">
+        <button onClick="play('boing')" class="w-full h-full" style="aspect-ratio:1/1"> &#x1F388; </button>
+      </div>
+      <div class="aud bg-white rounded-xl border-solid border-7 border-[#a3a3a3]">
+        <button onClick="play('laugh')" class="w-full h-full" style="aspect-ratio:1/1"> &#x1F604; </button>
+      </div>
+      <div class="aud bg-white rounded-xl border-solid border-7 border-[#a3a3a3]">
+        <button onClick="play('gameover')" class="w-full h-full" style="aspect-ratio:1/1"> &#x1F47E; </button>
+      </div>
+      <div class="aud bg-white rounded-xl border-solid border-7 border-[#a3a3a3]">
+        <button onClick="play('boo')" class="w-full h-full" style="aspect-ratio:1/1"> &#x1F44E; </button>
+      </div>
+    </div>
+  </div>
 
   <!-- TAILWIND -->
   <meta charset="UTF-8" />
@@ -172,7 +244,7 @@
           <div className="flex flex-col gap-5 justify-center items-center self-center w-3/5">
             <div className="flex flex-row gap-5 justify-center items-center w-full">
               <div className="flex flex-col w-3/7">
-                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
+                <div className="flex flex-col justify-center w-full rounded-xl overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Initial Render </div>
                     <p className="text-gray-700 text-base text-center">
@@ -189,13 +261,13 @@
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
               <div className="flex flex-col w-3/7">
-                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
+                <div className="flex flex-col justify-center w-full rounded-xl overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Interaction </div>
                     <p className="text-gray-700 text-base text-center">
                       User interactions are handled through the usage of React&apos;s event handlers such as OnClick and OnSubmit
                       <div className="text-[#eaeaea] text-xs"> &nbsp </div>
-                      <div className="rounded p-1 bg-[#d3d3d3]">
+                      <div className="rounded-xl p-1 bg-[#d3d3d3]">
                         &lt;element onEvent=&#123;handlerFunction&#125; /&gt;
                       </div>
                     </p>
@@ -208,7 +280,7 @@
             </div>
             <div className="flex flex-row gap-5 justify-center items-center w-full ">
               <div className="flex flex-col w-3/7 ">
-                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
+                <div className="flex flex-col justify-center w-full rounded-xl overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Rerender </div>
                     <p className="text-gray-700 text-base text-center">
@@ -225,7 +297,7 @@
                 <p className="arrow text-center text-[#8d9aa6]"> &#x2192; </p>
               </div>
               <div className="flex flex-col w-3/7">
-                <div className="flex flex-col justify-center w-full rounded overflow-hidden bg-[#eaeaea] h-[380px]">
+                <div className="flex flex-col justify-center w-full rounded-xl overflow-hidden bg-[#eaeaea] h-[380px]">
                   <div className="px-6 py-4">
                     <div className="text-gray-700 font-bold text-xl mb-2 text-center"> Diffing </div>
                     <p className="text-gray-700 text-base text-center">
@@ -250,7 +322,7 @@
               </div>
             </div>
             <div className="flex flex-row gap-5 w-full">
-              <div className="flex flex-col justify-center w-3/7 rounded overflow-hidden bg-[#eaeaea] h-[380px]">
+              <div className="flex flex-col justify-center w-3/7 rounded-xl overflow-hidden bg-[#eaeaea] h-[380px]">
                 <div className="px-6 py-4">
                   <div className="text-gray-700 font-bold text-xl mb-2 text-center"> DOM Update </div>
                   <p className="text-gray-700 text-base text-center">
@@ -487,6 +559,27 @@
 
     const todoDemo = ReactDOM.createRoot(document.getElementById('todoDemo'));
     todoDemo.render(<TodoDemo />);
+
+    // NORMAL JS STUFF
+    function reveal() {
+      document.getElementById('openSound').classList.add('hidden');
+      document.getElementById('soundboard').classList.remove('hidden');
+    }
+
+    function hide() {
+      document.getElementById('soundboard').classList.add('hidden');
+      document.getElementById('openSound').classList.remove('hidden');
+    }
+
+    function play(sound) {
+      document.querySelectorAll('audio').forEach(aud => {
+        if (aud.currentTime > 0) {
+          aud.pause();
+          aud.currentTime = 0;
+        }
+      });
+      document.getElementById(sound).play();
+    }
 
   </script>
 </body>

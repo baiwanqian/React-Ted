@@ -24,6 +24,7 @@
 
       font-style: italic;
       font-size: 130%;
+      z-index: 999;
     }
 
     #introCont {
@@ -168,6 +169,7 @@
   <div id="headCont" class=""> </div>
   <div id="introCont" class="self-center"> </div>
   <div id="vdom"> </div>
+  <div id = "structure" class = "demoWrap"> </div>
   <div id = "btnDemo" class = "demoWrap"> </div>
   <div id = "todoDemo" class = "demoWrap"> </div>
 
@@ -207,6 +209,7 @@
 
   <!-- INLINE REACT CODE (would be in another file but this way it can run in browser) -->
   <script type="text/babel">
+
     function Head() {
       return(
         <div id="head" className="flex items-center justify-between">
@@ -342,6 +345,250 @@
       )
     }
 
+    function Structure() {
+      const [topic, setTopic] = React.useState(null);
+
+      const TOPICS = {
+        imports: {
+          title: "Imports",
+          text:
+            "These scripts load React (components/hooks) and ReactDOM (renders React into the real browser DOM).",
+          code:
+            `import React from "react";
+             import ReactDOM from "react-dom/client";`,
+          extra:
+          `<!-- Demo style (CDN) -->
+          <script src="https://unpkg.com/react@18/umd/react.development.js"><\/script>
+          <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>`,
+        },
+
+        babel: {
+          title: "Babel (for demos)",
+          text:
+            "Browsers do NOT understand JSX. Babel translates JSX into plain JS. " +
+            "This is used solely for demo purposes.",
+          code:
+            `<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>
+
+            <script type="text/babel">
+              // JSX works in here because Babel compiles it
+            <\/script>`,
+          extra:
+            `In official projects, JSX is compiled during a build step (not in the browser).
+            Build tools like Vite or Webpack run Babel ahead of time and output plain JavaScript.`
+        },
+
+        mount: {
+          title: "Mount Point",
+          text:
+            "React needs a real DOM element to mount to. " +
+            "The mount point is chosen through using document.getElementById(...).",
+          code:
+            `<div id="mountPoint"></div>`,
+          extra:
+            `// You can mount multiple React roots:
+            ReactDOM.createRoot(document.getElementById("headCont")).render(<Head />);
+            ReactDOM.createRoot(document.getElementById("introCont")).render(<Intro />);
+            // Or mount once (more commonly used):
+            ReactDOM.createRoot(document.getElementById("root")).render(<App />);`
+        },
+
+        components: {
+          title: "Components",
+          text:
+            "A component is a function that returns JSX.",
+          code:
+            `function Head() {
+              return <div>Hello!</div>;
+            }
+
+            function App() {
+              return (
+                <div>
+                  <Head />
+                  <p>More UI…</p>
+                </div>
+              );
+            }`,
+          extra:
+            `// You can pass props into components:
+            function Hello({ name }) {
+              return <p>Hello {name}</p>;
+            }
+            // <Hello name="Helloer" />
+
+            - Component names must start with a capital letter
+            - A component returns one parent element (wrapped with \`<div>\` or \`<>\`).
+            - Use \`className\`, not \`class\`.
+            - JS goes in \`{ }\` inside JSX:
+            - Event handlers use camelCase: onClick={handleClick} (not "onclick")`
+        },
+
+        render: {
+          title: "Render",
+          text:
+            "This line mounts your component into the mount point. After that, React re-renders when state/props change.",
+          code:
+            `const root = ReactDOM.createRoot(document.getElementById("mountPoint"));
+            root.render(<MyComponent />);`,
+          extra:
+            `// Convention:
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<App />);`
+        }
+      };
+
+      function Click({id, children}) {
+        return (
+          <span
+            onClick={() => setTopic(id)}
+            className="cursor-pointer text-slate-900 rounded px-1 py-0.5 bg-slate-200 hover:bg-slate-300 transition font-semibold"
+            title="Click for explanation"
+          >
+            {children}
+          </span>
+        );
+      }
+
+      const t = topic ? TOPICS[topic] : null;
+
+      return (
+        <div>
+          <h3 className="heading2"> React Page Structure </h3>
+          <p className="text-slate-700 text-center">
+            Click the
+            <span className="bg-slate-200 px-1 rounded font-semibold"> highlighted </span>
+            code.
+          </p>
+
+          <div className="mt-4 bg-slate-900 text-slate-100 rounded-2xl p-4 text-sm">
+            <div className="text-slate-400">// index.html (Demo Style)</div>
+
+            <div>&lt;!DOCTYPE html&gt;</div>
+            <div>&lt;html&gt;</div>
+            <div className="pl-4">&lt;head&gt;</div>
+
+            <div className="pl-8 text-slate-300"> {`<!-- styles, meta, etc -->`} </div>
+            <div className="pl-8">
+              <Click id="imports">{`<script src="react"><\/script> <script src="react-dom"><\/script>`}</Click>
+            </div>
+
+            <div className="pl-8">
+              <Click id="babel">{`<script src="babel"><\/script>`}</Click>
+            </div>
+
+            <div className="pl-4">&lt;/head&gt;</div>
+            <div className="pl-4">&lt;body&gt;</div>
+
+            <div className="pl-8">
+              <Click id="mount">{`<div id="structure"></div>`}</Click>
+              <span className="text-slate-400">{"  // mount point"}</span>
+            </div>
+
+            <div className="pl-8 text-slate-300">{`<!-- other HTML stuff here -->`}</div>
+
+            <div className="pl-8">
+              <Click id="babel">{`<script type="text/babel">`}</Click>
+            </div>
+
+            <div className="pl-12 text-slate-200">
+              <Click id="components">{`// Components go here (functions that return JSX)`}</Click>
+            </div>
+
+            <div className="pl-12 text-slate-200">
+              <Click id="render">{`// Render into a mount point`}</Click>
+            </div>
+
+            <div className="pl-12">
+              <Click id="render">{`ReactDOM.createRoot(...).render(<App />);`}</Click>
+            </div>
+
+            <div className="pl-8">
+              <Click id="babel">{`<\/script>`}</Click>
+            </div>
+
+            <div className="pl-4">&lt;/body&gt;</div>
+            <div>&lt;/html&gt;</div>
+          </div>
+
+          {t && (
+            <div className="fixed inset-0 z-[9999]">
+              <div className="absolute inset-0 bg-black/60" onClick={() => setTopic(null)}></div>
+
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-6 shadow-xl">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <div className="text-2xl font-bold">{t.title}</div>
+                    <p className="text-slate-700 mt-2">{t.text}</p>
+                  </div>
+                  <button className="text-xl text-slate-500 hover:text-black" onClick={() => setTopic(null)}>
+                    ✕
+                  </button>
+                </div>
+
+                <div className="mt-4">
+                  <div className="font-semibold text-slate-700">Code</div>
+                  <pre className="mt-2 bg-slate-900 text-slate-100 rounded-xl p-4 overflow-auto text-sm">
+                    <code>{t.code}</code>
+                  </pre>
+                </div>
+
+                <div className="mt-4">
+                  <div className="font-semibold text-slate-700">Extra / Real-world note</div>
+                  <pre className="mt-2 bg-slate-100 text-slate-900 rounded-xl p-4 overflow-auto text-sm">
+                    <code>{t.extra}</code>
+                  </pre>
+                </div>
+
+                <div className="flex justify-end mt-5">
+                  <button
+                    className="px-4 py-2 rounded-lg bg-slate-700 text-white hover:bg-slate-900 transition"
+                    onClick={() => setTopic(null)}
+                  > Done </button>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="mt-6 bg-slate-900 text-slate-100 rounded-2xl p-4 text-sm">
+            <div className="text-slate-400">// Real React Project (Vite / CRA)</div>
+
+            <div>src/</div>
+            <div className="pl-4">main.jsx</div>
+            <div className="pl-8 text-slate-400">// entry point</div>
+
+            <div className="pl-4">App.jsx</div>
+            <div className="pl-8 text-slate-400">// root component</div>
+
+            <div className="pl-4">components/</div>
+            <div className="pl-8">Component1.jsx</div>
+            <div className="pl-8">Component2.jsx</div>
+
+            <div className="mt-2">public/</div>
+            <div className="pl-4">index.html</div>
+          </div>
+        </div>
+      );
+    }
+
+    function ExpandCode({ title, code }) {
+      const [open, setOpen] = React.useState(false);
+
+      return (
+        <div className="w-full mt-3">
+          <button
+            className="w-full text-left px-3 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 transition font-semibold"
+            onClick={() => setOpen(o => !o)}
+          > {title} </button>
+
+          {open && (
+            <pre className="mt-2 bg-slate-900 text-slate-100 rounded-xl p-4 overflow-auto text-sm">
+              <code>{code}</code>
+            </pre>
+          )}
+        </div>
+      );
+    }
+
     function BtnDemo() {
       const [playing, setPlaying] = React.useState(false);
       const [score, setScore] = React.useState(0);
@@ -351,8 +598,42 @@
       const nextBtn = React.useRef(1);
       const spawnT = React.useRef(null);
       const rmvT = React.useRef(null);
-      const spawn = Math.max(900 - score * 15, 500);
-      const rmv = Math.max(1400 - score * 20, 600);
+
+      const [tour, setTour] = React.useState(false);
+      const TOUR = [
+        {
+          targetId: "btnDemoRoot",
+          title: "This whole demo is a React component",
+          body:
+            "BtnDemo() is a function component. React calls it to produce UI. " +
+            "Whenever state changes (score/misses/btns/playing), React reruns BtnDemo and updates the page."
+        },
+        {
+          targetId: "btnDemoScore",
+          title: "Score and misses come from useState",
+          body:
+            "score and misses are stored in React state. When you call setScore/setMisses, React schedules a rerender. " +
+            "That rerender updates the text without you manually touching the DOM."
+        },
+        {
+          targetId: "btnDemoControls",
+          title: "Buttons change state, not the DOM directly",
+          body:
+            "Start/Reset call setPlaying, setScore, setMisses, setBtns. " +
+            "Instead of doing document.getElementById(...), you update data, and React updates the UI for you."
+        },
+        {
+          targetId: "demoArea",
+          title: "Buttons appear because btns array changes",
+          body:
+            "btns is an array in state. When you add objects to it, the map() creates more <button> elements. " +
+            "When you remove one, React removes just that button from the DOM."
+        }
+      ];
+
+      const lvl = Math.min(20, Math.floor(score / 2));
+      const spawn = Math.max(900 - lvl * 45, 250);
+      const rmv = Math.max(1400 - lvl * 70, 450);
 
       function startGame() {
         setPlaying(true);
@@ -422,9 +703,11 @@
       }, [misses]);
 
       return (
-        <div className = "flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center">
 
-          <h3 className = "heading2"> Button Game Demo </h3>
+          <div className="w-full flex justify-between items-center mb-2">
+            <h3 className= "heading2 m-0"> Button Game Demo </h3>
+          </div>
 
           <p className = "mb-2">
             <b>Score:</b> {score} &nbsp; | &nbsp; <b>Misses:</b> {Math.min(misses, 3)}/3
@@ -453,6 +736,26 @@
           </div>
 
           {!playing && misses >= 3 && <p className = "mt-3 font-bold"> GAME OVER </p>}
+
+          <ExpandCode
+          title="Expand"
+          code={
+`// STATE
+const [playing, setPlaying] = React.useState(false);
+const [score, setScore] = React.useState(0);
+const [misses, setMisses] = React.useState(0);
+const [btns, setBtns] = React.useState([]);
+
+// EFFECT (runs when dependencies change)
+React.useEffect(() => {
+  if (!playing) return;
+  const timer = setInterval(() => {
+    setBtns(prev => [...prev, { id: Date.now() }]);
+  }, 500);
+  return () => clearInterval(timer);
+}, [playing]);`}
+          />
+
         </div>
       );
 
@@ -462,6 +765,7 @@
       const [items, setItems] = React.useState([]);
       const [text, setText] = React.useState("");
       const nextId = React.useRef(1);
+      const [editID, setEdit] = React.useState(null);
 
       function add() {
         const t = text.trim();
@@ -476,6 +780,7 @@
 
       function rmv(id) {
         setItems(prev => prev.filter(x => x.id != id));
+        if (editID == id) setEdit(null);
       }
 
       function move(id, dir) {
@@ -487,6 +792,17 @@
           const tmp = copy[i];
           copy[i] = copy[j];
           copy[j] = tmp;
+          return copy;
+        });
+      }
+
+      function edit(id, newLabel) {
+        setItems(prev => {
+          const i = prev.findIndex(x => x.id == id);
+          if (i < 0) return prev;
+          const copy = [...prev];
+          const tmp = copy[i];
+          copy[i] = { ...tmp, label: newLabel };
           return copy;
         });
       }
@@ -519,9 +835,13 @@
 
             {items.map((it, i) => (
               <li key={it.id} className="flex items-center justify-between bg-white rounded-lg px-3 py-2">
-                <span className="text-left">
-                  <b className="text-slate-500">{i + 1}.</b> {it.label}
-                </span>
+                <div className="flex items-center gap-2 flex-1">
+                  <b className="text-slate-500">{i + 1}.</b>
+                  <input className="flex-1 px-2 py-1 rounded border border-slate-200"
+                         value = {it.label}
+                         onChange={(e) => edit(it.id, e.target.value)}
+                  />
+                </div>
 
                 <div className="flex gap-2">
                   <button
@@ -553,6 +873,8 @@
 
     const vdom = ReactDOM.createRoot(document.getElementById('vdom'));
     vdom.render(<VDom />);
+
+    ReactDOM.createRoot(document.getElementById("structure")).render(<Structure />);
 
     const btnDemo = ReactDOM.createRoot(document.getElementById('btnDemo'));
     btnDemo.render(<BtnDemo />);

@@ -216,7 +216,7 @@
           <p> a guide on reacting </p>
 
           <div className="flex gap-3">
-            <a className="headBtn" href="#content2"> content2 </a>
+            <a className="headBtn" href="#btnDemo"> Demos </a>
             <a className="headBtn" href="#1"> UP </a>
           </div>
         </div>
@@ -598,38 +598,6 @@
       const nextBtn = React.useRef(1);
       const spawnT = React.useRef(null);
       const rmvT = React.useRef(null);
-
-      const [tour, setTour] = React.useState(false);
-      const TOUR = [
-        {
-          targetId: "btnDemoRoot",
-          title: "This whole demo is a React component",
-          body:
-            "BtnDemo() is a function component. React calls it to produce UI. " +
-            "Whenever state changes (score/misses/btns/playing), React reruns BtnDemo and updates the page."
-        },
-        {
-          targetId: "btnDemoScore",
-          title: "Score and misses come from useState",
-          body:
-            "score and misses are stored in React state. When you call setScore/setMisses, React schedules a rerender. " +
-            "That rerender updates the text without you manually touching the DOM."
-        },
-        {
-          targetId: "btnDemoControls",
-          title: "Buttons change state, not the DOM directly",
-          body:
-            "Start/Reset call setPlaying, setScore, setMisses, setBtns. " +
-            "Instead of doing document.getElementById(...), you update data, and React updates the UI for you."
-        },
-        {
-          targetId: "demoArea",
-          title: "Buttons appear because btns array changes",
-          body:
-            "btns is an array in state. When you add objects to it, the map() creates more <button> elements. " +
-            "When you remove one, React removes just that button from the DOM."
-        }
-      ];
 
       const lvl = Math.min(20, Math.floor(score / 2));
       const spawn = Math.max(900 - lvl * 45, 250);

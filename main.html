@@ -355,11 +355,11 @@
             "These scripts load React (components/hooks) and ReactDOM (renders React into the real browser DOM).",
           code:
             `import React from "react";
-             import ReactDOM from "react-dom/client";`,
+import ReactDOM from "react-dom/client";`,
           extra:
           `<!-- Demo style (CDN) -->
-          <script src="https://unpkg.com/react@18/umd/react.development.js"><\/script>
-          <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>`,
+<script src="https://unpkg.com/react@18/umd/react.development.js"><\/script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>`,
         },
 
         babel: {
@@ -370,12 +370,12 @@
           code:
             `<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>
 
-            <script type="text/babel">
-              // JSX works in here because Babel compiles it
-            <\/script>`,
+<script type="text/babel">
+  // JSX works in here because Babel compiles it
+<\/script>`,
           extra:
             `In official projects, JSX is compiled during a build step (not in the browser).
-            Build tools like Vite or Webpack run Babel ahead of time and output plain JavaScript.`
+Build tools like Vite or Webpack run Babel ahead of time and output plain JavaScript.`
         },
 
         mount: {
@@ -399,29 +399,29 @@
             "A component is a function that returns JSX.",
           code:
             `function Head() {
-              return <div>Hello!</div>;
-            }
+  return <div>Hello!</div>;
+}
 
-            function App() {
-              return (
-                <div>
-                  <Head />
-                  <p>More UI…</p>
-                </div>
-              );
-            }`,
+function App() {
+  return (
+    <div>
+      <Head />
+      <p>More UI…</p>
+    </div>
+  );
+}`,
           extra:
             `// You can pass props into components:
-            function Hello({ name }) {
-              return <p>Hello {name}</p>;
-            }
-            // <Hello name="Helloer" />
+function Hello({ name }) {
+  return <p>Hello {name}</p>;
+}
+// <Hello name="Helloer" />
 
-            - Component names must start with a capital letter
-            - A component returns one parent element (wrapped with \`<div>\` or \`<>\`).
-            - Use \`className\`, not \`class\`.
-            - JS goes in \`{ }\` inside JSX:
-            - Event handlers use camelCase: onClick={handleClick} (not "onclick")`
+- Component names must start with a capital letter
+- A component returns one parent element (wrapped with \`<div>\` or \`<>\`).
+- Use \`className\`, not \`class\`.
+- JS goes in \`{ }\` inside JSX:
+- Event handlers use camelCase: onClick={handleClick} (not "onclick")`
         },
 
         render: {
@@ -430,11 +430,11 @@
             "This line mounts your component into the mount point. After that, React re-renders when state/props change.",
           code:
             `const root = ReactDOM.createRoot(document.getElementById("mountPoint"));
-            root.render(<MyComponent />);`,
+root.render(<MyComponent />);`,
           extra:
             `// Convention:
-            const root = ReactDOM.createRoot(document.getElementById("root"));
-            root.render(<App />);`
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);`
         }
       };
 
@@ -515,7 +515,7 @@
             <div className="fixed inset-0 z-[9999]">
               <div className="absolute inset-0 bg-black/60" onClick={() => setTopic(null)}></div>
 
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-6 shadow-xl">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-6 shadow-xl w-[92vw] max-w-3xl max-h-[85vh] overflow-auto">
                 <div className="flex justify-between items-start gap-4">
                   <div>
                     <div className="text-2xl font-bold">{t.title}</div>
